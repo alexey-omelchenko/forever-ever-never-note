@@ -13,6 +13,7 @@
       "one-line": false,
       "no-consecutive-blank-lines": false,
       "curly": false,
+      "ordered-imports": false,
       "react/jsx-uses-react": 1
     },
     "rulesDirectory": []

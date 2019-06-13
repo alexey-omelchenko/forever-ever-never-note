@@ -1,9 +1,8 @@
-// @tslint-disabled
 import React from 'react'
+import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom'
 
-// if you are integrating redux this is a good place to wrap your app in <Provider store={store}>
-// if you are using react-router this is a good place to set up your router
-// this setup needs to be done in a separate file from index.jsx to enable hot reloads
+import LoginPage from 'screens/login/login'
+import HomePage from 'screens/home/home'
 
 interface IProps {
   controller: any
@@ -52,7 +51,28 @@ export default class App extends React.Component<IProps, IState> {
     const disabled = this.state.busy ? 'disabled' : ''
     return (
       <KintoContext.Provider value={{controller: this.props.controller}}>
-        <div className={disabled}>
+        <Router>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <Link to="/login/">Login</Link>
+                </li>
+                <li>
+                  <Link to="/home/">Home</Link>
+                </li>
+              </ul>
+            </nav>
+
+            <Route path="/login/" component={LoginPage} />
+            <Route path="/home/" component={HomePage} />
+            <Redirect to="/login/" />
+          </div>
+        </Router>
+        <div
+          className={disabled}
+          style={{border: '1px solid black', padding: '10px', margin: '0 10px'}}
+        >
           <div className="error">{this.state.error}</div>
           <button onClick={this.onSyncClick.bind(this)} disabled={!!disabled}>
             Sync!
