@@ -1,14 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
 
-// if you are integrating redux this is a good place to wrap your app in <Provider store={store}>
-// if you are using react-router this is a good place to set up your router
-// this setup needs to be done in a separate file from index.jsx to enable hot reloads
+import LoginPage from 'screens/login/login';
+import HomePage from 'screens/home/home';
 
 
-export const App = () => (
-  <div>
-    Hello
-  </div>
-);
+const Pages = {
+  home: 'home',
+  login: 'login',
+};
+
+export const App = () => {
+
+  return (
+    <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/login/">Login</Link>
+            </li>
+            <li>
+              <Link to="/home/">Home</Link>
+            </li>
+          </ul>
+        </nav>
+
+        <Route path="/login/" component={LoginPage} />
+        <Route path="/home/" component={HomePage} />
+        <Redirect to="/login/" />
+      </div>
+    </Router>
+  );
+};
+// export const App = () => {
+//   const [page] = useState('login');
+//
+//   switch (page) {
+//     case Pages.login:
+//       return <LoginPage />;
+//     case Pages.home:
+//       return <HomePage />;
+//     default:
+//       return <LoginPage />;
+//   }
+// };
+
 
 export default App;
