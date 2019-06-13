@@ -4,6 +4,7 @@ const DEFAULT_SERVER = 'http://3.104.64.219:8888/v1/'
 export default class Controller {
   private store
   private auth
+  private config
   private events
 
   constructor(components, events) {
@@ -40,13 +41,22 @@ export default class Controller {
     // Save config for next sessions.
     window.localStorage.setItem('config', JSON.stringify(config))
     this.events.emit('config:change', config)
+    this.config = config
 
-    this.auth.configure(config)
-    this.auth.authenticate()
+    // this.auth.configure(config)
+    // this.auth.authenticate()
   }
 
-  onLogin(info) {
-    this.store.configure(info)
+  onLogin(info: {user: string; password: string; headers: {Authorization: string}}) {
+    if (!this.config) {
+      throw new Error('Config has not been loaded yet!')
+    }
+
+    this.store.configure({
+      ...info,
+      server: this.config.server,
+    })
+
     this.store.load()
   }
 
