@@ -6,7 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const merge = require('webpack-merge');
-const TsLintPlugin = require('tslint-webpack-plugin');
 
 const env = process.env.npm_lifecycle_event === 'build' ? 'prod' : 'dev';
 let config = {};
@@ -23,6 +22,18 @@ const common = {
 
   module: {
     rules: [
+      {
+        enforce: 'pre',
+        test: /\.(j|t)sx?$/,
+        exclude: /node_modules/,
+        loader: [
+          {
+            loader: 'prettier-loader',
+            options: {parser: 'typescript'},
+          },
+          'eslint-loader',
+        ],
+      },
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
@@ -41,9 +52,6 @@ const common = {
   },
 
   plugins: [
-    new TsLintPlugin({
-      files: ['./src/**/*.ts']
-    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       hash: true
