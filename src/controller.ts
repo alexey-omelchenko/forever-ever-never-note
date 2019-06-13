@@ -15,10 +15,6 @@ export default class Controller {
     this.events.on('auth:login', this.onLogin.bind(this))
     this.events.on('action:start', this.onStart.bind(this))
     this.events.on('action:configure', this.onConfigure.bind(this))
-    this.events.on('action:create', this.onCreate.bind(this))
-    this.events.on('action:update', this.onUpdate.bind(this))
-    this.events.on('action:delete', this.onDelete.bind(this))
-    this.events.on('action:sync', this.onSync.bind(this))
   }
 
   on(events, callback) {
@@ -58,21 +54,5 @@ export default class Controller {
     })
 
     this.store.load()
-  }
-
-  onCreate(record) {
-    this.store.create(record)
-  }
-
-  onUpdate(record) {
-    this.store.update(record)
-  }
-
-  onDelete(record) {
-    this.store.delete(record)
-  }
-
-  onSync() {
-    this.store.sync()
   }
 }

@@ -15,7 +15,7 @@ interface IState {
   server: string
 }
 
-export const KintoContext = React.createContext({controller: null})
+export const KintoContext = React.createContext({controller: null, store: null})
 
 export default class App extends React.Component<IProps, IState> {
   state = {
@@ -50,7 +50,10 @@ export default class App extends React.Component<IProps, IState> {
   render() {
     const disabled = this.state.busy ? 'disabled' : ''
     return (
-      <KintoContext.Provider value={{controller: this.props.controller}}>
+      <KintoContext.Provider value={{
+        controller: this.props.controller,
+        store: this.props.controller.store,
+      }}>
         <Router>
           <div>
             <nav>
