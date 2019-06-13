@@ -1,3 +1,5 @@
+/* eslint react/prop-types: 0 */
+
 import React from 'react'
 import {withRouter} from 'react-router-dom'
 import {KintoContext} from 'app'
@@ -37,7 +39,6 @@ const LoginPage = props => {
                 headers: {Authorization: 'Basic ' + userpass64},
               })
 
-              console.log(values)
               props.history.push('/home/')
               setSubmitting(false)
             }}

@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom'
+import {HashRouter as Router, Route, Link, Redirect} from 'react-router-dom'
 
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'
@@ -50,10 +50,12 @@ export default class App extends React.Component<IProps, IState> {
   render() {
     const disabled = this.state.busy ? 'disabled' : ''
     return (
-      <KintoContext.Provider value={{
-        controller: this.props.controller,
-        store: this.props.controller.store,
-      }}>
+      <KintoContext.Provider
+        value={{
+          controller: this.props.controller,
+          store: this.props.controller.store,
+        }}
+      >
         <Router>
           <div>
             <nav>

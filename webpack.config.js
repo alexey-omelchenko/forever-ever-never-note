@@ -14,9 +14,10 @@ let config = {};
 const common = {
   entry: ['@babel/polyfill', 'whatwg-fetch', './src/index.tsx'],
 
+  // TOOD: avoid hard code public url
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: env === 'dev' ? '/' : 'https://zzdjk6.github.io/forever-ever-never-note-demo/',
     filename: 'bundle.js'
   },
 
