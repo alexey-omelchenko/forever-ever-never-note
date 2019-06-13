@@ -1,6 +1,8 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 import {KintoContext} from 'app'
 import {Formik, Form, Field, ErrorMessage, FormikErrors} from 'formik'
+import {Button} from '@blueprintjs/core'
 
 interface ILoginFormValues {
   username: string
@@ -8,7 +10,7 @@ interface ILoginFormValues {
 }
 type FormErrors = FormikErrors<ILoginFormValues>
 
-const LoginPage = () => {
+const LoginPage = props => {
   const validate = (values: ILoginFormValues): FormErrors => {
     const errors: FormikErrors<ILoginFormValues> = {}
 
@@ -35,8 +37,8 @@ const LoginPage = () => {
                 headers: {Authorization: 'Basic ' + userpass64},
               })
 
-              this.props.history.push('/home/')
               console.log(values)
+              props.history.push('/home/')
               setSubmitting(false)
             }}
           >
@@ -47,6 +49,9 @@ const LoginPage = () => {
 
                 <Field type="password" name="password" />
                 <ErrorMessage name="password" component="div" />
+
+                <Button type="submit" intent="success" text="Submit" disabled={isSubmitting} />
+
                 <button type="submit" disabled={isSubmitting}>
                   Submit
                 </button>
@@ -59,4 +64,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default withRouter(LoginPage)
