@@ -1,4 +1,5 @@
 import React from 'react'
+import {KintoContext} from 'app'
 import {Formik, Form, Field, ErrorMessage, FormikErrors} from 'formik'
 
 interface ILoginFormValues {
@@ -19,32 +20,42 @@ const LoginPage = () => {
   }
 
   return (
-    <div>
-      <h1>Any place in your app!</h1>
-      <Formik
-        initialValues={{username: '', password: ''}}
-        validate={validate}
-        onSubmit={(values, {setSubmitting}) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2))
-            setSubmitting(false)
-          }, 400)
-        }}
-      >
-        {({isSubmitting}) => (
-          <Form>
-            <Field type="text" name="username" placeholder="Username..." />
-            <ErrorMessage name="username" component="div" />
+    <KintoContext.Consumer>
+      {({controller}) => (
+        <div>
+          <h1>Any place in your app!</h1>
+          <Formik
+            initialValues={{username: '', password: ''}}
+            validate={validate}
+            onSubmit={(values, {setSubmitting}) => {
+              const userpass64 = btoa(values.username + ':s3cr3t')
+              controller.onLogin({
+                user: values.username,
+                password: btoa(values.username + ':' + values.password),
+                headers: {Authorization: 'Basic ' + userpass64},
+              })
 
-            <Field type="password" name="password" />
-            <ErrorMessage name="password" component="div" />
-            <button type="submit" disabled={isSubmitting}>
-              Submit
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </div>
+              this.props.history.push('/home/')
+              console.log(values)
+              setSubmitting(false)
+            }}
+          >
+            {({isSubmitting}) => (
+              <Form>
+                <Field type="text" name="username" placeholder="Username..." />
+                <ErrorMessage name="username" component="div" />
+
+                <Field type="password" name="password" />
+                <ErrorMessage name="password" component="div" />
+                <button type="submit" disabled={isSubmitting}>
+                  Submit
+                </button>
+              </Form>
+            )}
+          </Formik>
+        </div>
+      )}
+    </KintoContext.Consumer>
   )
 }
 
