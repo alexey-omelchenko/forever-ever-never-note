@@ -15,6 +15,7 @@ export default class Auth {
   authenticate() {
     // Take username from location hash (With default value):
     const user = (this.location.hash = this.location.hash.slice(1) || 'public-demo')
+    console.log('user', user)
     const userpass64 = btoa(user + ':s3cr3t')
     const headers = {Authorization: 'Basic ' + userpass64}
     const server = this.server
