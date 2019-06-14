@@ -31,6 +31,17 @@ export default class Controller {
     const previous = window.localStorage.getItem('config')
     const config = previous ? JSON.parse(previous) : {server: DEFAULT_SERVER}
     this.dispatch('action:configure', config)
+
+    const username = localStorage.getItem('username')
+    const userpass64 = localStorage.getItem('userpass64')
+
+    if (username && userpass64) {
+      this.onLogin({
+        user: username,
+        password: userpass64,
+        headers: {Authorization: 'Basic ' + userpass64},
+      })
+    }
   }
 
   onConfigure(config) {

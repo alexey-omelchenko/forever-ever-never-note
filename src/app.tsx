@@ -15,7 +15,7 @@ interface IState {
   server: string
 }
 
-export const KintoContext = React.createContext({controller: null, store: null})
+export const KintoContext = React.createContext({controller: null, store: null, items: []})
 
 export default class App extends React.Component<IProps, IState> {
   state = {
@@ -30,12 +30,15 @@ export default class App extends React.Component<IProps, IState> {
       this.setState({busy: state, error: ''})
     })
     this.props.controller.on('store:change', state => {
+      console.log('>>> store:change', state)
       this.setState({items: state.items})
     })
     this.props.controller.on('store:error', error => {
+      console.log('>>> store:error')
       this.setState({error: error.message})
     })
     this.props.controller.on('config:change', config => {
+      console.log('>>> config:change')
       this.setState({server: config.server})
     })
 
@@ -44,7 +47,7 @@ export default class App extends React.Component<IProps, IState> {
   }
 
   onSyncClick = () => {
-    this.props.controller.dispatch('action:sync')
+    this.props.controller.store.sync()
   }
 
   render() {
@@ -54,6 +57,7 @@ export default class App extends React.Component<IProps, IState> {
         value={{
           controller: this.props.controller,
           store: this.props.controller.store,
+          items: this.state.items,
         }}
       >
         <Router>
