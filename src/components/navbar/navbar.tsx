@@ -29,7 +29,7 @@ const Navbar = props => {
               <Link to="/create/" className="bp3-button bp3-minimal bp3-icon-document">
                 Create
               </Link>
-              <button className="bp3-button bp3-minimal bp3-icon-document" onClick={onLogout}>
+              <button className="bp3-button bp3-minimal bp3-icon-log-out" onClick={onLogout}>
                 Logout
               </button>
             </>
