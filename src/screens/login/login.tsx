@@ -45,7 +45,7 @@ const LoginPage = props => {
                 headers: {Authorization: 'Basic ' + userpass64},
               })
 
-              props.history.push('/home/')
+              props.history.push('/')
               setSubmitting(false)
             }}
           >
