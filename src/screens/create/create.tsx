@@ -3,7 +3,7 @@ import {KintoContext} from 'app'
 import {Formik, Form, Field, ErrorMessage, FormikErrors} from 'formik'
 
 interface ICreateFormValues {
-  contentTitle: string
+  title: string
   content: string
 }
 
@@ -13,9 +13,9 @@ const CreatePage = () => {
   const validate = (values: ICreateFormValues): FormErrors => {
     const errors: FormikErrors<ICreateFormValues> = {}
 
-    if (values.contentTitle.length > 200) {
+    if (values.title.length > 200) {
       // Restrict length?
-      errors.contentTitle = 'Too long titles should be shorter. Max 200'
+      errors.title = 'Too long titles should be shorter. Max 200'
     }
 
     return errors
@@ -27,7 +27,7 @@ const CreatePage = () => {
         <div>
           <h1>Create Note</h1>
           <Formik
-            initialValues={{contentTitle: '', content: ''}}
+            initialValues={{title: '', content: ''}}
             validate={validate}
             onSubmit={(values, {setSubmitting}) => {
               setTimeout(() => {
@@ -39,8 +39,8 @@ const CreatePage = () => {
           >
             {({isSubmitting}) => (
               <Form>
-                <Field type="text" name="contentTitle" placeholder="Title..." />
-                <ErrorMessage name="contentTitle" component="div" />
+                <Field type="text" name="title" placeholder="Title..." />
+                <ErrorMessage name="title" component="div" />
                 <br />
                 <Field type="textarea" name="content" placeholder="Your note..." />
                 <ErrorMessage name="content" component="div" />
