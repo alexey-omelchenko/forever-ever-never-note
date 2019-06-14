@@ -1,5 +1,5 @@
 import React from 'react'
-import {HashRouter as Router, Route, Link, Redirect} from 'react-router-dom'
+import {HashRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
 
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'
@@ -78,23 +78,11 @@ export default class App extends React.Component<IProps, IState> {
               </ul>
             </nav>
 
-            <Route path="/create/" component={CreatePage} />
-            <Route path="/login/" component={LoginPage} />
-            <Route path="/home/" component={HomePage} />
-            <Route
-              path="/note/edit/:id"
-              component={({match}) => {
-                return (
-                  <KintoContext.Consumer>
-                    {({items}) => {
-                      const note = items.filter(item => item.id === match.params.id).shift()
-                      return <EditNodePage defaultMode="write" note={note} />
-                    }}
-                  </KintoContext.Consumer>
-                )
-              }}
-            />
-            <Redirect to="/login/" />
+            <Switch>
+              <Route path="/create/" component={CreatePage} />
+              <Route path="/login/" component={LoginPage} />
+              <Route path="/" component={HomePage} />
+            </Switch>
           </div>
         </Router>
         <div
