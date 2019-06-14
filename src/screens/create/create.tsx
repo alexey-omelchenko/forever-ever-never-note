@@ -34,7 +34,7 @@ const CreatePage = props => {
             onSubmit={(values, {setSubmitting}) => {
               setTimeout(() => {
                 store.create(values)
-                props.history.push('/home/')
+                props.history.push('/')
                 setSubmitting(false)
               }, 400)
             }}

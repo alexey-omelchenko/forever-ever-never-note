@@ -70,14 +70,15 @@ export default class App extends React.Component<IProps, IState> {
           <div>
             <Navbar />
             <Switch>
-              <Route
+              <Route path="/login/" component={LoginPage} />
+              <ProtectedRoute
                 path="/create/"
                 component={() => {
                   return <EditNodePage defaultMode="write" note={null} isNew={true} />
                 }}
               />
-              <Route path="/login/" component={LoginPage} />
-              <Route path="/" component={HomePage} />
+              <ProtectedRoute path="/create/" component={CreatePage} />
+              <ProtectedRoute path="/" component={HomePage} />
               <Redirect to="/" />
             </Switch>
           </div>

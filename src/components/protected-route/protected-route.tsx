@@ -1,17 +1,18 @@
 import React, {useEffect} from 'react'
 import {Route, Redirect, withRouter} from 'react-router-dom'
+import {getLoginStatus} from 'utils'
 
 const PrivateRoute = ({component: Component, history, otherProps}) => {
-  const username = localStorage.getItem('username')
-  const password = localStorage.getItem('userpass64')
-
-  const isLoggedIn = !!username && !!password
+  const isLoggedIn = getLoginStatus()
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!getLoginStatus()) {
       history.push('/login')
     }
+
+    return () => {}
   })
+
   if (!isLoggedIn) {
     return <Redirect to="/login" />
   }
