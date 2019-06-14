@@ -3,6 +3,7 @@ import {HashRouter as Router, Route, Link, Redirect} from 'react-router-dom'
 
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'
+import EditNodePage from 'screens/note/edit'
 
 interface IProps {
   controller: any
@@ -75,6 +76,7 @@ export default class App extends React.Component<IProps, IState> {
 
             <Route path="/login/" component={LoginPage} />
             <Route path="/home/" component={HomePage} />
+            <Route path="/note/edit" component={EditNodePage} />
             <Redirect to="/login/" />
           </div>
         </Router>
