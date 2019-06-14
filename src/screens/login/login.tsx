@@ -28,42 +28,42 @@ const LoginPage = props => {
   return (
     <KintoContext.Consumer>
       {({controller}) => (
-          <Formik
-            initialValues={{username: '', password: ''}}
-            validate={validate}
-            onSubmit={(values, {setSubmitting}) => {
-              const userpass64 = btoa(values.username + ':' + values.password)
+        <Formik
+          initialValues={{username: '', password: ''}}
+          validate={validate}
+          onSubmit={(values, {setSubmitting}) => {
+            const userpass64 = btoa(values.username + ':' + values.password)
 
-              localStorage.setItem('username', values.username)
-              localStorage.setItem('userpass64', userpass64)
+            localStorage.setItem('username', values.username)
+            localStorage.setItem('userpass64', userpass64)
 
-              controller.onLogin({
-                user: values.username,
-                password: btoa(values.username + ':' + values.password),
-                headers: {Authorization: 'Basic ' + userpass64},
-              })
+            controller.onLogin({
+              user: values.username,
+              password: btoa(values.username + ':' + values.password),
+              headers: {Authorization: 'Basic ' + userpass64},
+            })
 
-              props.history.push('/')
-              setSubmitting(false)
-            }}
-          >
-            {({isSubmitting}) => (
-              <Form>
-                <legend>Login Form</legend>
+            props.history.push('/')
+            setSubmitting(false)
+          }}
+        >
+          {({isSubmitting}) => (
+            <Form>
+              <legend>Login Form</legend>
 
-                <FormGroup>
-                  <Field type="text" name="username" placeholder="Username..." />
-                  <ErrorMessage name="username" component="div" />
-                </FormGroup>
-                <FormGroup>
-                  <Field type="password" name="password" />
-                  <ErrorMessage name="password" component="div" />
-                </FormGroup>
+              <FormGroup>
+                <Field type="text" name="username" placeholder="Username..." />
+                <ErrorMessage name="username" component="div" />
+              </FormGroup>
+              <FormGroup>
+                <Field type="password" name="password" />
+                <ErrorMessage name="password" component="div" />
+              </FormGroup>
 
-                <Button type="submit" intent="success" text="Submit" disabled={isSubmitting} />
-              </Form>
-            )}
-          </Formik>
+              <Button type="submit" intent="success" text="Submit" disabled={isSubmitting} />
+            </Form>
+          )}
+        </Formik>
       )}
     </KintoContext.Consumer>
   )

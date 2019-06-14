@@ -50,7 +50,7 @@ class EditNodePage extends Component<IProps, IState> {
 
   componentDidMount() {
     this.setState({
-      value: this.props.isNew ? '' : this.props.note.content,
+      value: !this.props.isNew && this.props.note ? this.props.note.content : '',
       tab: this.props.defaultMode,
     })
   }
@@ -82,7 +82,9 @@ class EditNodePage extends Component<IProps, IState> {
             <div>
               <h1>Create Note</h1>
               <Formik
-                initialValues={{title: this.props.isNew ? '' : this.props.note.title}}
+                initialValues={{
+                  title: !this.props.isNew && this.props.note ? this.props.note.title : '',
+                }}
                 validate={validate}
                 onSubmit={(values, {setSubmitting}) => {
                   if (this.props.isNew) {
@@ -130,6 +132,16 @@ class EditNodePage extends Component<IProps, IState> {
             </div>
           )}
         </KintoContext.Consumer>
+        {this.props.isNew === false && this.props.note && (
+          <div>
+            {this.props.note.created_at && (
+              <div>Created At: {moment.unix(this.props.note.created_at).format('LLL')}</div>
+            )}
+            {this.props.note.updated_at && (
+              <div>Updated At: {moment.unix(this.props.note.updated_at).format('LLL')}</div>
+            )}
+          </div>
+        )}
       </div>
     )
   }
