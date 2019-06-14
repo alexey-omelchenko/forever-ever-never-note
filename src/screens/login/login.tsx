@@ -48,7 +48,7 @@ const LoginPage = props => {
           }}
         >
           {({isSubmitting}) => (
-            <Form>
+            <Form className="login-form">
               <legend>Login Form</legend>
 
               <FormGroup>

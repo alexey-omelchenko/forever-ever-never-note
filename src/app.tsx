@@ -7,7 +7,7 @@ import Navbar from 'components/navbar/navbar'
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'
 import EditNodePage from 'screens/note/edit'
-import {OnlineStatus} from 'components/OnlineStatus'
+import SettingsPage from 'screens/settings/preferences'
 
 interface IProps {
   controller: any
@@ -68,7 +68,7 @@ export default class App extends React.Component<IProps, IState> {
       >
         <Router>
           <div>
-            <Navbar />
+            <Navbar onSync={this.onSyncClick} />
             <Switch>
               <Route path="/login/" component={LoginPage} />
               <ProtectedRoute
@@ -77,6 +77,7 @@ export default class App extends React.Component<IProps, IState> {
                   return <EditNodePage defaultMode="write" note={null} isNew={true} />
                 }}
               />
+              <ProtectedRoute path="/settings" component={SettingsPage} />
               <ProtectedRoute path="/" component={HomePage} />
               <Redirect to="/" />
             </Switch>
@@ -90,34 +91,8 @@ export default class App extends React.Component<IProps, IState> {
           <button onClick={this.onSyncClick.bind(this)} disabled={!!disabled}>
             Sync!
           </button>
-          <Preferences server={this.state.server} />
-          <OnlineStatus />
         </div>
       </KintoContext.Provider>
-    )
-  }
-}
-
-export class Preferences extends React.Component<{server: string}> {
-  static contextType = KintoContext
-
-  onChange = event => {
-    const config = {server: event.target.value}
-    this.context.controller.dispatch('action:configure', config)
-  }
-
-  render() {
-    return (
-      <div className="preferences">
-        <input id="toggle" type="checkbox"></input>
-        <label htmlFor="toggle">Preferences</label>
-        <form>
-          <label>
-            Server
-            <input value={this.props.server} onChange={this.onChange} />
-          </label>
-        </form>
-      </div>
     )
   }
 }

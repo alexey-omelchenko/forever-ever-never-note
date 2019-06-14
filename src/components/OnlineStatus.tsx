@@ -21,5 +21,9 @@ export const OnlineStatus = (props: any) => {
     }
   }, [])
 
-  return <div className={`online-status`}>{onlineStatus ? 'ONLINE' : 'OFFLINE'}</div>
+  return (
+    <div className={`online-status`} style={{display: 'inline-block'}}>
+      {onlineStatus ? 'ONLINE' : 'OFFLINE'}
+    </div>
+  )
 }
