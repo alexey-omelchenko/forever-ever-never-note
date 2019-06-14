@@ -6,6 +6,7 @@
   "scripts": {
     "build": "rm -rf ./dist && ./node_modules/.bin/webpack -p",
     "start": "./node_modules/.bin/webpack-dev-server --hot --inline --mode development",
+    "go": "http-server ./dist",
     "test": "./node_modules/.bin/jest",
     "test:watch": "./node_modules/.bin/jest --watch",
     "test:coverage": "./node_modules/.bin/jest --coverage",
@@ -84,7 +85,8 @@
     "webpack": "^4.34.0",
     "webpack-cli": "^3.3.4",
     "webpack-dev-server": "^3.7.1",
-    "webpack-merge": "^4.2.1"
+    "webpack-merge": "^4.2.1",
+    "workbox-webpack-plugin": "^4.3.1"
   },
   "jest": {
     "verbose": true,

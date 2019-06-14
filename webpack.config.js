@@ -6,6 +6,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const merge = require('webpack-merge');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+
 
 const env = process.env.npm_lifecycle_event === 'build' ? 'prod' : 'dev';
 let config = {};
@@ -66,6 +68,12 @@ const common = {
     new StyleLintPlugin({
       context: path.resolve(__dirname, 'src'),
       files: '**/*.s?(a|c)ss'
+    }),
+    new WorkboxPlugin.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast
+      // and not allow any straggling "old" SWs to hang around
+      clientsClaim: true,
+      skipWaiting: true
     })
   ],
 
