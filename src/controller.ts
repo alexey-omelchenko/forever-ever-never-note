@@ -1,5 +1,5 @@
 // const DEFAULT_SERVER = 'https://kinto.dev.mozaws.net/v1'
-const DEFAULT_SERVER = 'http://3.104.64.219:8888/v1/'
+const DEFAULT_SERVER = 'https://kinto.trinhtrunganh.com/v1/'
 
 export default class Controller {
   private store

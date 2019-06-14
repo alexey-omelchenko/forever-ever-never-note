@@ -7,6 +7,8 @@ import Navbar from 'components/navbar/navbar'
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'
 import EditNodePage from 'screens/note/edit'
+import CreatePage from 'screens/create/create'
+import {OnlineStatus} from 'components/OnlineStatus'
 
 interface IProps {
   controller: any
@@ -90,6 +92,7 @@ export default class App extends React.Component<IProps, IState> {
             Sync!
           </button>
           <Preferences server={this.state.server} />
+          <OnlineStatus />
         </div>
       </KintoContext.Provider>
     )
