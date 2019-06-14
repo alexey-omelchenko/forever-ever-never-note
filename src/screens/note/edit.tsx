@@ -17,6 +17,7 @@ export interface IProps {
   isNew: boolean
   note: any
   defaultMode: 'write' | 'preview'
+  history: any
 }
 
 interface ICreateFormValues {
