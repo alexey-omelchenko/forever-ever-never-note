@@ -68,6 +68,10 @@ class EditNodePage extends Component<IProps, IState> {
     const validate = (values: ICreateFormValues): FormErrors => {
       const errors: FormikErrors<ICreateFormValues> = {}
 
+      if (values.title.length < 4) {
+        errors.title = 'Too short titles should be longer. Min 4'
+      }
+
       if (values.title.length > 200) {
         // Restrict length?
         errors.title = 'Too long titles should be shorter. Max 200'
@@ -109,10 +113,14 @@ class EditNodePage extends Component<IProps, IState> {
               >
                 {({isSubmitting}) => (
                   <Form className="form">
-                    <legend>Create Note Form</legend>
                     <FormGroup>
-                      <Field type="text" name="title" placeholder="Title..." />
-                      <ErrorMessage name="title" component="div" />
+                      <Field
+                        type="text"
+                        name="title"
+                        placeholder="Title..."
+                        className="bp3-input"
+                      />
+                      <ErrorMessage name="title" component="div" className="error-msg" />
                     </FormGroup>
                     <FormGroup>
                       <ReactMde

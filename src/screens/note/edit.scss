@@ -1,5 +1,14 @@
 .edit-note-page {
   .form {
     width: 100%;
+
+    .bp3-input {
+      width: 100%;
+    }
+
+    .error-msg {
+      padding-left: 0.5rem;
+      color: red;
+    }
   }
 }
