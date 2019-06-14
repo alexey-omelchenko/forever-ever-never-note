@@ -53,16 +53,11 @@ const LoginPage = props => {
                 <legend>Login Form</legend>
 
                 <FormGroup>
-                  <Field
-                    type="text"
-                    name="username"
-                    placeholder="Username..."
-                    component={InputGroup}
-                  />
+                  <Field type="text" name="username" placeholder="Username..." />
                   <ErrorMessage name="username" component="div" />
                 </FormGroup>
                 <FormGroup>
-                  <Field type="password" name="password" component={InputGroup} />
+                  <Field type="password" name="password" />
                   <ErrorMessage name="password" component="div" />
                 </FormGroup>
 
