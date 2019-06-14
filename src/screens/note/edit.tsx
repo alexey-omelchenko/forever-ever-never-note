@@ -3,12 +3,17 @@ import ReactMde from 'react-mde'
 import * as Showdown from 'showdown'
 import './react-mde-all.scss'
 
-export interface State {
+export interface IState {
   value: string
   tab: 'write' | 'preview'
 }
 
-class EditNodePage extends Component<any, State> {
+export interface IProps {
+  note: any
+  defaultMode: 'write' | 'preview'
+}
+
+class EditNodePage extends Component<IProps, IState> {
   converter: Showdown.Converter
 
   constructor(props) {
@@ -22,6 +27,13 @@ class EditNodePage extends Component<any, State> {
       simplifiedAutoLink: true,
       strikethrough: true,
       tasklists: true,
+    })
+  }
+
+  componentDidMount() {
+    this.setState({
+      value: this.props.note.content,
+      tab: this.props.defaultMode,
     })
   }
 

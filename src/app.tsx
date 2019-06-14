@@ -81,7 +81,19 @@ export default class App extends React.Component<IProps, IState> {
             <Route path="/create/" component={CreatePage} />
             <Route path="/login/" component={LoginPage} />
             <Route path="/home/" component={HomePage} />
-            <Route path="/note/edit" component={EditNodePage} />
+            <Route
+              path="/note/edit/:id"
+              component={({match}) => {
+                return (
+                  <KintoContext.Consumer>
+                    {({items}) => {
+                      const note = items.filter(item => item.id === match.params.id).shift()
+                      return <EditNodePage defaultMode="write" note={note} />
+                    }}
+                  </KintoContext.Consumer>
+                )
+              }}
+            />
             <Redirect to="/login/" />
           </div>
         </Router>
