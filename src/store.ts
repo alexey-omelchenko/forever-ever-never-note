@@ -37,7 +37,6 @@ export default class Store {
   onReady() {
     this.events.emit('store:change', this.state)
     this.events.emit('store:busy', false)
-    //this.sync()
   }
 
   _execute(promise) {
@@ -58,7 +57,9 @@ export default class Store {
       this.collection.create(record).then(res => {
         this.state.items.push(res.data)
       })
-    )
+    ).then(() => {
+      this.sync()
+    })
   }
 
   update(record) {
@@ -68,7 +69,9 @@ export default class Store {
           return item.id === record.id ? res.data : item
         })
       })
-    )
+    ).then(() => {
+      this.sync()
+    })
   }
 
   delete(record) {
