@@ -1,4 +1,5 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 import {KintoContext} from 'app'
 import {Formik, Form, Field, ErrorMessage, FormikErrors} from 'formik'
 import {Button, FormGroup} from '@blueprintjs/core'
@@ -10,7 +11,7 @@ interface ICreateFormValues {
 
 type FormErrors = FormikErrors<ICreateFormValues>
 
-const CreatePage = () => {
+const CreatePage = props => {
   const validate = (values: ICreateFormValues): FormErrors => {
     const errors: FormikErrors<ICreateFormValues> = {}
 
@@ -33,7 +34,7 @@ const CreatePage = () => {
             onSubmit={(values, {setSubmitting}) => {
               setTimeout(() => {
                 store.create(values)
-                alert(JSON.stringify(values, null, 2))
+                props.history.push('/home/')
                 setSubmitting(false)
               }, 400)
             }}
@@ -60,4 +61,4 @@ const CreatePage = () => {
   )
 }
 
-export default CreatePage
+export default withRouter(CreatePage)
