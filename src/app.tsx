@@ -4,6 +4,7 @@ import {HashRouter as Router, Route, Link, Redirect} from 'react-router-dom'
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'
 import EditNodePage from 'screens/note/edit'
+import CreatePage from 'screens/create/create'
 
 interface IProps {
   controller: any
@@ -71,9 +72,13 @@ export default class App extends React.Component<IProps, IState> {
                 <li>
                   <Link to="/home/">Home</Link>
                 </li>
+                <li>
+                  <Link to="/create/">New</Link>
+                </li>
               </ul>
             </nav>
 
+            <Route path="/create/" component={CreatePage} />
             <Route path="/login/" component={LoginPage} />
             <Route path="/home/" component={HomePage} />
             <Route path="/note/edit" component={EditNodePage} />
