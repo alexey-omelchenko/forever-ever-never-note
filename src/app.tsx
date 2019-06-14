@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router, Route, Link, Redirect} from 'react-router-dom'
+import {HashRouter as Router, Route, Link, Redirect} from 'react-router-dom'
 
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'

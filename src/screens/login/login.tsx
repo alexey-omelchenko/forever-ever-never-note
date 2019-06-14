@@ -1,3 +1,5 @@
+/* eslint react/prop-types: 0 */
+
 import React from 'react'
 import {withRouter} from 'react-router-dom'
 import {KintoContext} from 'app'
