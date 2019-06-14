@@ -1,6 +1,8 @@
 import React from 'react'
+import {withRouter} from 'react-router-dom'
 import {KintoContext} from 'app'
 import {Formik, Form, Field, ErrorMessage, FormikErrors} from 'formik'
+import {Button, FormGroup} from '@blueprintjs/core'
 
 interface ICreateFormValues {
   title: string
@@ -9,7 +11,7 @@ interface ICreateFormValues {
 
 type FormErrors = FormikErrors<ICreateFormValues>
 
-const CreatePage = () => {
+const CreatePage = props => {
   const validate = (values: ICreateFormValues): FormErrors => {
     const errors: FormikErrors<ICreateFormValues> = {}
 
@@ -32,23 +34,24 @@ const CreatePage = () => {
             onSubmit={(values, {setSubmitting}) => {
               setTimeout(() => {
                 store.create(values)
-                alert(JSON.stringify(values, null, 2))
+                props.history.push('/home/')
                 setSubmitting(false)
               }, 400)
             }}
           >
             {({isSubmitting}) => (
               <Form>
-                <Field type="text" name="title" placeholder="Title..." />
-                <ErrorMessage name="title" component="div" />
-                <br />
-                <Field type="textarea" name="content" placeholder="Your note..." />
-                <ErrorMessage name="content" component="div" />
+                <legend>Create Note Form</legend>
+                <FormGroup>
+                  <Field type="text" name="title" placeholder="Title..." />
+                  <ErrorMessage name="title" component="div" />
+                </FormGroup>
+                <FormGroup>
+                  <Field type="textarea" name="content" placeholder="Your note..." />
+                  <ErrorMessage name="content" component="div" />
+                </FormGroup>
 
-                <button type="submit" disabled={isSubmitting}>
-                  {' '}
-                  Submit
-                </button>
+                <Button type="submit" intent="success" text="Submit" disabled={isSubmitting} />
               </Form>
             )}
           </Formik>
@@ -58,4 +61,4 @@ const CreatePage = () => {
   )
 }
 
-export default CreatePage
+export default withRouter(CreatePage)
