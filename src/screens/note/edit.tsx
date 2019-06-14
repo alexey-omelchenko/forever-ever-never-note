@@ -6,6 +6,7 @@ import {KintoContext} from 'app'
 import {Formik, Form, Field, ErrorMessage, FormikErrors} from 'formik'
 import {Button, FormGroup} from '@blueprintjs/core'
 import {withRouter} from 'react-router-dom'
+import moment from 'moment'
 
 export interface IState {
   value: string
@@ -87,12 +88,15 @@ class EditNodePage extends Component<IProps, IState> {
                     store.create({
                       title: values.title,
                       content: this.state.value,
+                      created_at: moment().unix(),
+                      updated_at: moment().unix(),
                     })
                   } else {
                     store.update({
                       id: this.props.note.id,
                       title: values.title,
                       content: this.state.value,
+                      updated_at: moment().unix(),
                     })
                   }
                   setSubmitting(false)
