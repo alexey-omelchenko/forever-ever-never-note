@@ -79,7 +79,12 @@ export default class App extends React.Component<IProps, IState> {
             </nav>
 
             <Switch>
-              <Route path="/create/" component={CreatePage} />
+              <Route
+                path="/create/"
+                component={() => {
+                  return <EditNodePage defaultMode="write" note={null} isNew={true} />
+                }}
+              />
               <Route path="/login/" component={LoginPage} />
               <Route path="/" component={HomePage} />
             </Switch>
