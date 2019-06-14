@@ -1,5 +1,8 @@
 import React from 'react'
-import {HashRouter as Router, Route, Link, Redirect} from 'react-router-dom'
+import {HashRouter as Router, Route, Redirect} from 'react-router-dom'
+
+import ProtectedRoute from 'components/protected-route/protected-route'
+import Navbar from 'components/navbar/navbar'
 
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'
@@ -54,6 +57,7 @@ export default class App extends React.Component<IProps, IState> {
 
   render() {
     const disabled = this.state.busy ? 'disabled' : ''
+
     return (
       <KintoContext.Provider
         value={{
@@ -64,24 +68,11 @@ export default class App extends React.Component<IProps, IState> {
       >
         <Router>
           <div>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/login/">Login</Link>
-                </li>
-                <li>
-                  <Link to="/home/">Home</Link>
-                </li>
-                <li>
-                  <Link to="/create/">New</Link>
-                </li>
-              </ul>
-            </nav>
-
-            <Route path="/create/" component={CreatePage} />
+            <Navbar />
+            <ProtectedRoute path="/create/" component={CreatePage} />
             <Route path="/login/" component={LoginPage} />
-            <Route path="/home/" component={HomePage} />
-            <Route path="/note/edit" component={EditNodePage} />
+            <ProtectedRoute path="/home/" component={HomePage} />
+            <ProtectedRoute path="/note/edit" component={EditNodePage} />
             <Redirect to="/login/" />
           </div>
         </Router>
