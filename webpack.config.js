@@ -50,6 +50,14 @@ const common = {
           limit: 1024, // will insert a data URI if filesize < 1kb otherwise uses file-loader
           fallback: 'file-loader'
         }
+      },
+      {
+        test: /\.(png|gif|jpg|svg)$/,
+        use: 'url-loader?name=./assets/images/[name]-[hash].[ext]&limit=2048',
+      },
+      {
+        test: /\.(woff2?|otf|ttf|eot)$/,
+        use: 'file-loader?name=assets/fonts/[name]-[hash].[ext]',
       }
     ]
   },
