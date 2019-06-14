@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link, withRouter} from 'react-router-dom'
 import {getLoginStatus} from 'utils'
+import {OnlineStatus} from 'components/OnlineStatus'
 
 const Navbar = props => {
   const isLoggedIn = getLoginStatus()
@@ -14,10 +15,6 @@ const Navbar = props => {
     props.history.push('/login')
   }
 
-  const onSync = () => {
-    console.log('syncing....')
-  }
-
   return (
     <nav className="bp3-navbar bp3-dark">
       <div>
@@ -26,9 +23,16 @@ const Navbar = props => {
           {isLoggedIn && (
             <>
               <span className="bp3-navbar-divider"></span>
-              <button className="bp3-button bp3-minimal bp3-icon-refresh" onClick={onSync}>
+              <button
+                className="bp3-button bp3-minimal bp3-icon-refresh"
+                onClick={() => props.onSync()}
+              >
                 Sync
               </button>
+              <span className="bp3-navbar-divider"></span>
+              <div>
+                Status: <OnlineStatus />
+              </div>
             </>
           )}
         </div>

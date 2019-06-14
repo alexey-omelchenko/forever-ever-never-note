@@ -7,6 +7,7 @@ import Navbar from 'components/navbar/navbar'
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'
 import EditNodePage from 'screens/note/edit'
+import SettingsPage from 'screens/settings/preferences'
 
 interface IProps {
   controller: any
@@ -67,7 +68,7 @@ export default class App extends React.Component<IProps, IState> {
       >
         <Router>
           <div>
-            <Navbar />
+            <Navbar onSync={this.onSyncClick} />
             <Switch>
               <Route path="/login/" component={LoginPage} />
               <ProtectedRoute
@@ -90,7 +91,6 @@ export default class App extends React.Component<IProps, IState> {
           <button onClick={this.onSyncClick.bind(this)} disabled={!!disabled}>
             Sync!
           </button>
-          <OnlineStatus />
         </div>
       </KintoContext.Provider>
     )
