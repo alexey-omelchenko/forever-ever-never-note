@@ -7,6 +7,7 @@ import {Formik, Form, Field, ErrorMessage, FormikErrors} from 'formik'
 import {Button, FormGroup} from '@blueprintjs/core'
 import {withRouter} from 'react-router-dom'
 import moment from 'moment'
+import './edit.scss'
 
 export interface IState {
   value: string
@@ -50,7 +51,7 @@ class EditNodePage extends Component<IProps, IState> {
 
   componentDidMount() {
     this.setState({
-      value: this.props.isNew ? '' : this.props.note.content,
+      value: !this.props.isNew && this.props.note ? this.props.note.content : '',
       tab: this.props.defaultMode,
     })
   }
@@ -76,13 +77,15 @@ class EditNodePage extends Component<IProps, IState> {
     }
 
     return (
-      <div className="container">
+      <div className="edit-note-page">
         <KintoContext.Consumer>
           {({store}) => (
             <div>
-              <h1>Create Note</h1>
+              <h1>{this.props.isNew ? 'Create Note' : 'Edit Note'}</h1>
               <Formik
-                initialValues={{title: this.props.isNew ? '' : this.props.note.title}}
+                initialValues={{
+                  title: !this.props.isNew && this.props.note ? this.props.note.title : '',
+                }}
                 validate={validate}
                 onSubmit={(values, {setSubmitting}) => {
                   if (this.props.isNew) {
@@ -105,7 +108,7 @@ class EditNodePage extends Component<IProps, IState> {
                 }}
               >
                 {({isSubmitting}) => (
-                  <Form>
+                  <Form className="form">
                     <legend>Create Note Form</legend>
                     <FormGroup>
                       <Field type="text" name="title" placeholder="Title..." />
@@ -130,6 +133,16 @@ class EditNodePage extends Component<IProps, IState> {
             </div>
           )}
         </KintoContext.Consumer>
+        {this.props.isNew === false && this.props.note && (
+          <div>
+            {this.props.note.created_at && (
+              <div>Created At: {moment.unix(this.props.note.created_at).format('LLL')}</div>
+            )}
+            {this.props.note.updated_at && (
+              <div>Updated At: {moment.unix(this.props.note.updated_at).format('LLL')}</div>
+            )}
+          </div>
+        )}
       </div>
     )
   }

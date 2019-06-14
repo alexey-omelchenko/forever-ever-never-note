@@ -7,7 +7,6 @@ import Navbar from 'components/navbar/navbar'
 import LoginPage from 'screens/login/login'
 import HomePage from 'screens/home/home'
 import EditNodePage from 'screens/note/edit'
-import CreatePage from 'screens/create/create'
 
 interface IProps {
   controller: any
@@ -77,7 +76,6 @@ export default class App extends React.Component<IProps, IState> {
                   return <EditNodePage defaultMode="write" note={null} isNew={true} />
                 }}
               />
-              <ProtectedRoute path="/create/" component={CreatePage} />
               <ProtectedRoute path="/" component={HomePage} />
               <Redirect to="/" />
             </Switch>
