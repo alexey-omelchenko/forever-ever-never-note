@@ -3,6 +3,7 @@ import {KintoContext} from 'app'
 import {Route, Link} from 'react-router-dom'
 import EditNodePage from 'screens/note/edit'
 import './home.scss'
+import {Spinner} from '@blueprintjs/core'
 
 const HomePage = () => {
   return (
@@ -24,6 +25,9 @@ const HomePage = () => {
               path="/note/edit/:id"
               component={({match}) => {
                 const note = items.find(item => item.id === match.params.id)
+                if (!note) {
+                  return <Spinner />
+                }
                 return <EditNodePage defaultMode="write" note={note} />
               }}
             />
