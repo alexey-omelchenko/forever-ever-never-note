@@ -37,7 +37,7 @@ export default class Store {
   onReady() {
     this.events.emit('store:change', this.state)
     this.events.emit('store:busy', false)
-    this.sync()
+    //this.sync()
   }
 
   _execute(promise) {
