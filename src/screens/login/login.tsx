@@ -28,8 +28,6 @@ const LoginPage = props => {
   return (
     <KintoContext.Consumer>
       {({controller}) => (
-        <div>
-          <h1>Any place in your app!</h1>
           <Formik
             initialValues={{username: '', password: ''}}
             validate={validate}
@@ -66,7 +64,6 @@ const LoginPage = props => {
               </Form>
             )}
           </Formik>
-        </div>
       )}
     </KintoContext.Consumer>
   )

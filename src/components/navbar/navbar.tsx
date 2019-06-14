@@ -16,7 +16,7 @@ const Navbar = props => {
 
   return (
     <nav className="bp3-navbar bp3-dark">
-      <div style={{margin: '0 auto', width: '480px'}}>
+      <div>
         <div className="bp3-navbar-group bp3-align-left">
           <div className="bp3-navbar-heading">ATAK</div>
         </div>
