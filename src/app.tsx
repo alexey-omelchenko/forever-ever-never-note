@@ -50,10 +50,12 @@ export default class App extends React.Component<IProps, IState> {
   render() {
     const disabled = this.state.busy ? 'disabled' : ''
     return (
-      <KintoContext.Provider value={{
-        controller: this.props.controller,
-        store: this.props.controller.store,
-      }}>
+      <KintoContext.Provider
+        value={{
+          controller: this.props.controller,
+          store: this.props.controller.store,
+        }}
+      >
         <Router>
           <div>
             <nav>

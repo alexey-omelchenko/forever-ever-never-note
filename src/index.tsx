@@ -8,6 +8,8 @@ import Store from './store'
 import Controller from './controller'
 import {EventEmitter} from 'events'
 
+import './index.scss'
+
 const events = new EventEmitter()
 const auth = new Auth(events, window.location)
 const store = new Store('notes', events)

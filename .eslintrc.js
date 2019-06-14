@@ -12,6 +12,7 @@ module.exports = {
     "react/display-name": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "no-extra-semi": "off",
+    "react/prop-types": 0,
     "no-unused-vars": ["error", {"argsIgnorePattern": "^_"}]
   },
 }
