@@ -12,7 +12,7 @@ import './index.scss'
 
 const events = new EventEmitter()
 const auth = new Auth(events, window.location)
-const store = new Store('notes', events)
+const store = new Store('app', 'notes', events)
 const controller = new Controller({auth, store}, events)
 
 const renderComponent = Component => {

@@ -2,13 +2,15 @@ import Kinto from 'kinto'
 
 export default class Store {
   private state: any
-  private dataset: any
+  private collectionName: string
+  private bucketName: string
   private events: any
   private collection: any
 
-  constructor(dataset, events) {
+  constructor(bucket, collectionName, events) {
     this.state = {items: []}
-    this.dataset = dataset
+    this.collectionName = collectionName
+    this.bucketName = bucket
     this.events = events
     this.collection = null
   }
@@ -19,8 +21,9 @@ export default class Store {
         remote: connection.server,
         dbPrefix: connection.user,
         headers: connection.headers,
+        bucket: this.bucketName,
       })
-      this.collection = kinto.collection(this.dataset)
+      this.collection = kinto.collection(this.collectionName)
     } catch (e) {
       this.onError(e)
     }

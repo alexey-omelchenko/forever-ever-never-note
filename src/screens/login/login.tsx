@@ -34,10 +34,11 @@ const LoginPage = props => {
             initialValues={{username: '', password: ''}}
             validate={validate}
             onSubmit={(values, {setSubmitting}) => {
-              localStorage.setItem('username', values.username)
-              localStorage.setItem('userpass64', btoa(values.username + ':' + values.password))
+              const userpass64 = btoa(values.username + ':' + values.password)
 
-              const userpass64 = btoa(values.username + ':s3cr3t')
+              localStorage.setItem('username', values.username)
+              localStorage.setItem('userpass64', userpass64)
+
               controller.onLogin({
                 user: values.username,
                 password: btoa(values.username + ':' + values.password),
