@@ -1,6 +1,7 @@
 import React from 'react'
 import {KintoContext} from 'app'
 import {Formik, Form, Field, ErrorMessage, FormikErrors} from 'formik'
+import {Button, FormGroup} from '@blueprintjs/core'
 
 interface ICreateFormValues {
   title: string
@@ -39,16 +40,17 @@ const CreatePage = () => {
           >
             {({isSubmitting}) => (
               <Form>
-                <Field type="text" name="title" placeholder="Title..." />
-                <ErrorMessage name="title" component="div" />
-                <br />
-                <Field type="textarea" name="content" placeholder="Your note..." />
-                <ErrorMessage name="content" component="div" />
+                <legend>Create Note Form</legend>
+                <FormGroup>
+                  <Field type="text" name="title" placeholder="Title..." />
+                  <ErrorMessage name="title" component="div" />
+                </FormGroup>
+                <FormGroup>
+                  <Field type="textarea" name="content" placeholder="Your note..." />
+                  <ErrorMessage name="content" component="div" />
+                </FormGroup>
 
-                <button type="submit" disabled={isSubmitting}>
-                  {' '}
-                  Submit
-                </button>
+                <Button type="submit" intent="success" text="Submit" disabled={isSubmitting} />
               </Form>
             )}
           </Formik>
